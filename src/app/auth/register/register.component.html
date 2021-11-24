@@ -1,0 +1,157 @@
+<div class="auth-wrapper auth-v1 px-2">
+  <div class="auth-inner py-2">
+
+    <!-- Register -->
+    <div class="card mb-0">
+      <div class="card-body">
+        
+        <a href="javascript:void(0);" class="brand-logo">
+          <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" height="28" />
+          <h2 class="brand-text text-primary ml-1">Menta</h2>
+        </a>
+
+        <h4 class="card-title mb-1">La aventura comienza aquí 🚀</h4>
+        <p class="card-text mb-2">¡Haz la administración de tu app fácil y divertida!</p>
+
+        <form class="auth-register-form mt-2" 
+              [formGroup]="registerForm" 
+              (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label for="register-name" class="form-label">Nombre</label>
+
+            <input
+              type="text"
+              formControlName="nombre"
+              class="form-control"
+              placeholder="p. ej. Luis Jiménez"
+              aria-describedby="register-name"
+              tabindex="1" 
+              autofocus
+              [ngClass]="{ 'is-invalid': formSubmitted && f.nombre.errors }"
+            />
+
+            <div *ngIf="formSubmitted && f.nombre.errors" class="invalid-feedback">
+              <div *ngIf="f.nombre.errors.required">El usuario es requerido.</div>
+            </div>
+
+          </div>
+          
+          <div class="form-group">
+            <label for="register-email" class="form-label">Email</label>
+            <input
+              type="text"
+              formControlName="email"
+              class="form-control"
+              placeholder="luis@ejemplo.com"
+              aria-describedby="register-email"
+              tabindex="2"
+              [ngClass]="{ 'is-invalid': formSubmitted && f.email.errors }"
+            />
+            <div *ngIf="formSubmitted && f.email.errors" class="invalid-feedback">
+              <div *ngIf="f.email.errors.required">El email es requerido</div>
+              <div *ngIf="f.email.errors.email">El email debe ser una dirección válida</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="register-password" class="form-label">Contraseña</label>
+
+            <div class="input-group input-group-merge form-password-toggle">
+              <input
+                [type]="passwordTextType ? 'text' : 'password'"
+                formControlName="password"
+                class="form-control form-control-merge"
+                placeholder="············"
+                aria-describedby="register-password"
+                tabindex="3"
+                [ngClass]="{ 'is-invalid error': formSubmitted && f.password.errors }"
+              />
+              <div class="input-group-append">
+                <span class="input-group-text cursor-pointer"
+                  ><i
+                    class="feather font-small-4"
+                    [ngClass]="{
+                      'icon-eye-off': passwordTextType,
+                      'icon-eye': !passwordTextType
+                    }"
+                    (click)="togglePasswordTextType()"
+                  ></i
+                ></span>
+              </div>
+            </div>
+            <div *ngIf="formSubmitted && f.password.errors"
+                  class="invalid-feedback"
+                  [ngClass]="{ 'd-block': formSubmitted && f.password.errors }" 
+                  >
+              <div *ngIf="f.password.errors.required">La contraseña es requerida.</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="register-password2" class="form-label">Confirmar contraseña</label>
+            <input
+              type="password"
+              formControlName="password2"
+              class="form-control"
+              placeholder="············"
+              aria-describedby="register-password2"
+              tabindex="4"
+              [ngClass]="{ 'is-invalid': formSubmitted && f.password2.errors }"
+            />
+            <div *ngIf="formSubmitted && f.password2.errors" class="invalid-feedback">
+              <div *ngIf="f.password2.errors.required">Confirma tu contraseña</div>
+              <div *ngIf="passwordsNoValid()" >Las contraseñas no coinciden</div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="custom-control custom-checkbox">
+              <input class="custom-control-input" 
+                      type="checkbox" 
+                      id="register-privacy-policy" 
+                      formControlName="policy" 
+                      tabindex="5" 
+                      [ngClass]="{ 'is-invalid': formSubmitted && f.policy.errors }"
+                      />
+              <label class="custom-control-label" for="register-privacy-policy">
+                Estoy de acuerdo con los <a href="javascript:void(0);">Términos y Pólitica de Privacidad</a>
+              </label>
+              <div *ngIf="acceptPolicy()" class="invalid-feedback">
+                <div *ngIf="f.policy.errors.required">* Acepta los Términos y Política de Privacidad</div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" tabindex="6" rippleEffect>Registrarse</button>
+        </form>
+
+        <p class="text-center mt-2">
+          <span>¿Ya tienes cuenta? </span>
+          <a routerLink="/login">
+            <span> Ingresa a tu cuenta</span>
+          </a>
+        </p>
+
+        <div class="divider my-2">
+          <div class="divider-text">o</div>
+        </div>
+
+        <div class="auth-footer-btn d-flex justify-content-center">
+          <a href="javascript:void(0)" class="btn btn-facebook">
+            <i data-feather="facebook"></i>
+          </a>
+          <a href="javascript:void(0)" class="btn btn-twitter white">
+            <i data-feather="twitter"></i>
+          </a>
+          <a href="javascript:void(0)" class="btn btn-google">
+            <i data-feather="mail"></i>
+          </a>
+          <a href="javascript:void(0)" class="btn btn-github">
+            <i data-feather="github"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- /Register -->
+  </div>
+</div>
